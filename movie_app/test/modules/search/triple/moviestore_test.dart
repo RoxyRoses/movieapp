@@ -4,7 +4,7 @@ import 'package:movie_app/modules/search/domain/entities/results.dart';
 import 'package:movie_app/modules/search/domain/usecases/search_movie_usecase.dart';
 import 'package:movie_app/modules/search/external/datasources/search_movie_datasource_api.dart';
 import 'package:movie_app/modules/search/infra/repositories/search_movie_repository_impl.dart';
-import 'package:movie_app/modules/search/triple/moviestore.dart';
+import 'package:movie_app/modules/search/presenter/states/triple/moviestore.dart';
 import 'package:triple_test/triple_test.dart';
 
 class UseCaseMock extends Mock implements SearchMovieUseCaseImpl{}

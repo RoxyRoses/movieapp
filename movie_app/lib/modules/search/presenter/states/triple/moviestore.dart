@@ -2,7 +2,8 @@ import 'package:dependency_module/core_module.dart';
 import 'package:movie_app/modules/search/domain/entities/results.dart';
 import 'package:movie_app/modules/search/domain/usecases/search_movie_usecase.dart';
 
-import '../domain/errors/errors.dart';
+import '../../../domain/errors/errors.dart';
+
 
 class MovieStore
     extends MobXStore<Exception, Either<FailureSearch, List<Results>>> {

@@ -161,7 +161,7 @@ packages:
     source: hosted
     version: "2.0.5"
   flutter_modular:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_modular
       url: "https://pub.dartlang.org"
@@ -311,7 +311,7 @@ packages:
     source: hosted
     version: "1.0.4"
   modular_test:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: modular_test
       url: "https://pub.dartlang.org"
@@ -658,6 +658,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0+1"
+  xenomorph_design_system:
+    dependency: "direct main"
+    description:
+      path: "../xenomorph_design_system"
+      relative: true
+    source: path
+    version: "0.0.1"
   yaml:
     dependency: transitive
     description:
