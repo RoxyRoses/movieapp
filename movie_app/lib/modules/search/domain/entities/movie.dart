@@ -1,8 +1,8 @@
-import 'package:movie_app/modules/search/domain/entities/results.dart';
+import 'package:movie_app/modules/search/infra/models/resultsDto.dart';
 
 class Movie {
    int page = 0;
-   List<Results> results = [];
+   List<ResultsDto> results = [];
    int totalPages = 0;
    int totalResults = 0;
 
@@ -11,9 +11,9 @@ class Movie {
   Movie.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <ResultsDto>[];
       json['results'].forEach((v) {
-        results.add(Results.fromJson(v));
+        results.add(ResultsDto.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
