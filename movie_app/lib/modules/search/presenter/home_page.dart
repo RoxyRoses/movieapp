@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/modules/search/presenter/widgets/categories_widget.dart';
 import 'package:xenomorph_design_system/xenomorph_design_system.dart';
+
+import '../domain/entities/categories.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,6 +10,23 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    List<Categories> categories = <Categories>[];
+
+    categories
+        .add(Categories('All'));
+        categories
+        .add(Categories('Movies'));
+
+categories
+        .add(Categories('Series'));
+        categories
+        .add(Categories('Anime'));
+        categories
+        .add(Categories('Animation'));
+
+
+
+
     return Scaffold(
       backgroundColor: themedark,
       appBar: AppBar(
@@ -53,17 +73,39 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body:  Column(
-        children: [
-          const SizedBox(height: 18),
-          Padding(
-            padding:  EdgeInsets.only(left: size.width * 4 / 120),
-            child: Text(
-              'Categories',
-              style: TextStyle(color: const Color(0xffD8D8DA), fontWeight: FontWeight.bold, fontSize: size.height *  2 / 50),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 18),
+            Padding(
+              padding: EdgeInsets.only(left: size.width * 4 / 120),
+              child: Row(
+                children: [
+                  Text(
+                    'Categories',
+                    style: TextStyle(
+                        color: const Color(0xffD8D8DA),
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.height * 2 / 50),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: size.height * 1 / 25,),
+            SizedBox(
+              height: size.height * 8 / 130,
+              child: ListView.builder(
+                itemCount: categories.length,
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: ((context, index){
+                  return CategoryWidget(externalPadding: EdgeInsets.only(left: size.width * 2 / 20), height: 50,
+                  categoryName: categories[index].name,);
+                }),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
