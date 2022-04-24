@@ -1,7 +1,8 @@
 class Categories {
   final String name;
+   bool isSelected;
 
-  Categories(this.name);
+  Categories(this.name, this.isSelected);
  
 
 }

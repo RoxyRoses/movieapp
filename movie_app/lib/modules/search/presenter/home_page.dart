@@ -4,29 +4,32 @@ import 'package:xenomorph_design_system/xenomorph_design_system.dart';
 
 import '../domain/entities/categories.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Categories> categories = <Categories>[];
+
+  @override
+  void initState() {
+    super.initState();
+
+    categories.add(Categories('All', false));
+    categories.add(Categories('Movies', false));
+
+    categories.add(Categories('Series', false));
+    categories.add(Categories('Anime', false));
+    categories.add(Categories('Animation', false));
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    List<Categories> categories = <Categories>[];
-
-    categories
-        .add(Categories('All'));
-        categories
-        .add(Categories('Movies'));
-
-categories
-        .add(Categories('Series'));
-        categories
-        .add(Categories('Anime'));
-        categories
-        .add(Categories('Animation'));
-
-
-
-
+    
     return Scaffold(
       backgroundColor: themedark,
       appBar: AppBar(
@@ -91,16 +94,32 @@ categories
                 ],
               ),
             ),
-            SizedBox(height: size.height * 1 / 25,),
+            SizedBox(
+              height: size.height * 1 / 25,
+            ),
             SizedBox(
               height: size.height * 8 / 130,
               child: ListView.builder(
                 itemCount: categories.length,
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemBuilder: ((context, index){
-                  return CategoryWidget(externalPadding: EdgeInsets.only(left: size.width * 2 / 20), height: 50,
-                  categoryName: categories[index].name,);
+                itemBuilder: ((context, index) {
+                  return CategoryWidget(
+                    externalPadding: EdgeInsets.only(left: size.width * 2 / 25),
+                    height: 35,
+                    categoryName: categories[index].name,
+                    tap: () {
+                      setState(
+                        () {
+                          for (var element in categories) {
+                            element.isSelected = false;
+                          }
+                          categories[index].isSelected = true;
+                        },
+                      );
+                    },
+                    isSelected: categories[index].isSelected,
+                  );
                 }),
               ),
             )

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class CategoryWidget extends StatelessWidget {
   final double height;
+  final double width;
   final String categoryName;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? externalPadding;
@@ -15,7 +16,8 @@ class CategoryWidget extends StatelessWidget {
       this.externalPadding = const EdgeInsets.only(left: 5),
       this.tap,
       this.categoryName = 'all',
-      this.height = 89})
+      this.height = 89,
+      this.width = 90})
       : super(key: key);
 
   @override
@@ -28,9 +30,8 @@ class CategoryWidget extends StatelessWidget {
       localPadding = padding;
     }
 
-    Color localColor = const Color(0xff0F1122);
-    Color fontColor = const Color(0xffDFDFE1);
-    String imagePath = '';
+    Color localColor = const Color(0xffDFDFE1);
+    Color fontColor = const Color(0xff0F1122);
 
     switch (isSelected) {
       case true:
@@ -38,8 +39,8 @@ class CategoryWidget extends StatelessWidget {
         fontColor = const Color(0xffDFDFE1);
         break;
       case false:
-        localColor = const Color(0xffFFFFFF);
-        fontColor = const Color(0xff000000);
+        localColor = const Color(0xff000000);
+        fontColor = const Color(0xffDFDFE1);
         break;
       default:
     }
@@ -49,22 +50,22 @@ class CategoryWidget extends StatelessWidget {
         padding: externalPadding ?? const EdgeInsets.all(0.8),
         child: Center(
           child: Container(
+            width: width,
             height: height,
             padding: localPadding,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(height * 25 / 89),
+              borderRadius: BorderRadius.circular(height * 30 / 89),
               color: localColor,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min, 
               children: [
-                SizedBox(width: height * 20 / 89),
                 FittedBox(
                   child: Text(
                     categoryName,
                     style:
-                        TextStyle(fontSize: height * 25 / 89, color: fontColor),
+                        TextStyle(fontSize: height * 35 / 89, color: fontColor),
                   ),
                 ),
               ],
