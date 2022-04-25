@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
+import 'package:movie_app/modules/search/domain/entities/results.dart';
+import 'package:movie_app/modules/search/infra/repositories/search_movie_repository_impl.dart';
+import 'package:movie_app/modules/search/presenter/states/triple/moviestore.dart';
+import 'package:movie_app/modules/search/presenter/widgets/card_widget.dart';
 import 'package:movie_app/modules/search/presenter/widgets/categories_widget.dart';
 import 'package:xenomorph_design_system/xenomorph_design_system.dart';
 
@@ -12,24 +18,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final store = Modular.get<MovieStore>();
+  final repository = Modular.get<SearchMovieRepositoryImpl>();
   List<Categories> categories = <Categories>[];
+   
 
   @override
   void initState() {
+    store.add();
     super.initState();
-
     categories.add(Categories('All', false));
     categories.add(Categories('Movies', false));
 
     categories.add(Categories('Series', false));
     categories.add(Categories('Anime', false));
     categories.add(Categories('Animation', false));
+
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
     return Scaffold(
       backgroundColor: themedark,
       appBar: AppBar(
@@ -122,7 +131,48 @@ class _HomePageState extends State<HomePage> {
                   );
                 }),
               ),
-            )
+            ),
+            TripleBuilder<MovieStore, Exception, List<Results>>(
+                store: store,
+                builder: (context, state){
+                  if (state.error != null) {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Error'),
+                        content: const Text('Something went wrong'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  if (state.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  return SizedBox(
+                    height: size.height * 30 / 490,
+                    width: size.width * 1,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 5,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              CardWidget()
+                            ],
+                          );
+                        }),
+                  );
+                })
           ],
         ),
       ),

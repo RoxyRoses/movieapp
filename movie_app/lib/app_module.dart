@@ -15,11 +15,11 @@ class AppModule extends Module{
     Bind((i) => SearchMovieUseCaseImpl(i())),
     Bind((i) => Dio()),
     Bind((i) => SearchMovieRepositoryImpl(i())),
-    Bind((i) => MovieStore(i(), i())),
+    Bind((i) => MovieStore(i())),
   ];
 
    @override
   List<ModularRoute> get routes => [
-        ChildRoute(Modular.initialRoute,child: (_, __) => HomePage() ),
+        ChildRoute(Modular.initialRoute,child: (_, __) => const HomePage() ),
       ];
 }
