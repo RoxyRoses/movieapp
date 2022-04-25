@@ -1,5 +1,6 @@
 import 'package:dependency_module/core_module.dart';
 import 'package:dio/dio.dart';
+import 'package:movie_app/modules/search/domain/entities/results.dart';
 import 'package:movie_app/modules/search/domain/usecases/search_movie_usecase.dart';
 import 'package:movie_app/modules/search/external/datasources/search_movie_datasource_api.dart';
 import 'package:movie_app/modules/search/infra/repositories/search_movie_repository_impl.dart';
@@ -17,17 +18,17 @@ main() {
 
   final usecase = UseCaseMock();
 
-  // storeTest<MovieStore>(
-  //   'Testing triple',
-  //   build: () {
-  //     when(() => usecase.getMovies())
-  //         .thenAnswer((_) async => right(<Results>[]));
+  storeTest<MovieStore>(
+    'Testing triple',
+    build: () {
+      when(() => usecase.getMovies())
+          .thenAnswer((_) async => right(<Results>[]));
 
-  //     return MovieStore(usecase);
-  //   },
-  //   act: (store) => store.add(),
-  //   expect: () => [tripleLoading, tripleState],
-  // );
+      return MovieStore(usecase);
+    },
+    act: (store) => store.add(),
+    expect: () => [tripleLoading, tripleState],
+  );
 
   storeTest<MovieStore>(
     'Testing triple error',

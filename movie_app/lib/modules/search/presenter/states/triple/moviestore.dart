@@ -19,19 +19,11 @@ class MovieStore extends MobXStore<Exception, List<Results>> {
         setLoading(false);
       }, (r) {
         list = r;
-        updateList();
+        update(list);
       });
     } catch (e) {
       setError(Exception(e));
     }
   }
 
-  updateList() {
-    setLoading(false);
-    if (list.isEmpty) {
-      update(list);
-    } else {
-      update(list);
-    }
-  }
 }
