@@ -15,10 +15,6 @@ class SearchMovieUseCaseImpl implements SearchMovieUseCase{
   @override
   Future<Either<FailureSearch, List<Results>>> getMovies() async {
     var result = repository.getMovies();
-
-    if(result == null){
-      return Left(InvalidListError());
-    }
     return result;
   }
 

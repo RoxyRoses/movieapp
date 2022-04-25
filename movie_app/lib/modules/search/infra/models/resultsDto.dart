@@ -64,7 +64,6 @@ class ResultsDto extends Results {
     );
   }
 
-  @override
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
@@ -85,7 +84,6 @@ class ResultsDto extends Results {
     return result;
   }
 
-  @override
   String toJson() => json.encode(toMap());
 
   factory ResultsDto.fromJson(String source) =>

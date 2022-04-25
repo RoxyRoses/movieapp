@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  favorite_button: ^0.0.4
+  cached_network_image: ^3.2.0
   modular_test: any
   flutter_modular: ^4.5.1+1
   triple_test: ^1.0.0
