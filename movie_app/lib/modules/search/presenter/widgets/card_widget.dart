@@ -66,7 +66,7 @@ class CardWidget extends StatelessWidget {
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+                                    const Icon(Icons.error_outlined),
                               ),
                             ),
                           ),
@@ -140,7 +140,7 @@ class CardWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  releaseDate,
+                                  checkNull(releaseDate),
                                   maxLines: 1,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
@@ -202,5 +202,13 @@ class CardWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String checkNull(String string) {
+    if (string == "") {
+      string = 'not avaiable';
+      return string;
+    }
+    return string;
   }
 }

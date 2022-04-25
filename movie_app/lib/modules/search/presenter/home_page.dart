@@ -128,6 +128,7 @@ class _HomePageState extends State<HomePage> {
                 }),
               ),
             ),
+            SizedBox(height: size.height * 1 / 50),
             ScopedBuilder<MovieStore, Exception, List<Results>>(
               store: store,
               onError: (_, Exception? error) {
@@ -176,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                             accent: result.originalLanguage,
                             releaseDate: result.releaseDate,
                             voteAverage: result.voteAverage,
-                          )
+                          ),
                         ],
                       );
                     },
