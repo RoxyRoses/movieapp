@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -23,11 +22,12 @@ class CardWidget extends StatelessWidget {
       this.releaseDate = '',
       this.voteAverage = 0.0})
       : super(key: key);
+      
+    var url = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    var url = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
     return Center(
       child: GestureDetector(
         child: Stack(
@@ -61,13 +61,7 @@ class CardWidget extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius:
                                   BorderRadius.circular(height * 50 / 200),
-                              child: CachedNetworkImage(
-                                imageUrl: url + imagePath,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error_outlined),
-                              ),
+                              child: checkImageNull(imagePath),
                             ),
                           ),
                         ),
@@ -210,5 +204,12 @@ class CardWidget extends StatelessWidget {
       return string;
     }
     return string;
+  }
+
+   checkImageNull(String image) {
+    if (image == "") {
+      return Image.asset('assets/images/error.png');
+    }
+    return Image.network(url + image);
   }
 }

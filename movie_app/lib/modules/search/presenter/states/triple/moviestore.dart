@@ -7,10 +7,8 @@ class MovieStore extends MobXStore<Exception, List<Results>> {
 
   MovieStore(this.usecase) : super(<Results>[]);
 
-  List<Results> list = [];
-
-  Future<void> add() async {
-    try {
+  Future<void> getMoviesList() async {
+    
       setLoading(true);
       await Future.delayed(const Duration(seconds: 2));
       final result = await usecase.getMovies();
@@ -18,12 +16,8 @@ class MovieStore extends MobXStore<Exception, List<Results>> {
         setError(l);
         setLoading(false);
       }, (r) {
-        list = r;
-        update(list);
+        update(r);
       });
-    } catch (e) {
-      setError(Exception(e));
-    }
   }
-
+//facade - controller, orquestrador de stores
 }

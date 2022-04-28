@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
       title: 'Movie App',
       routerDelegate: Modular.routerDelegate,
       routeInformationParser: Modular.routeInformationParser,
+      //configuração tema
     );
   }
 }

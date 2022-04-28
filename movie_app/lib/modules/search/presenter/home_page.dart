@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    store.add();
+    store.getMoviesList();
     super.initState();
     categories.add(Categories('All', false));
     categories.add(Categories('Movies', false));
@@ -132,19 +132,6 @@ class _HomePageState extends State<HomePage> {
             ScopedBuilder<MovieStore, Exception, List<Results>>(
               store: store,
               onError: (_, Exception? error) {
-                showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Text('Error'),
-                    content: const Text('Something went wrong'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'OK'),
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
                 return const Center(
                   child: Icon(
                     Icons.search_off_rounded,

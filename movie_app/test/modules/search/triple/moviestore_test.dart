@@ -26,7 +26,7 @@ main() {
 
       return MovieStore(usecase);
     },
-    act: (store) => store.add(),
+    act: (store) => store.getMoviesList(),
     expect: () => [tripleLoading, tripleState],
   );
 
@@ -37,7 +37,7 @@ main() {
 
       return MovieStore(usecase);
     },
-    act: (store) => store.add(),
+    act: (store) => store.getMoviesList(),
     expect: () => [tripleLoading, tripleError],
   );
 }
